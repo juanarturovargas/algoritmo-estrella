@@ -5,13 +5,16 @@ class Table:
   '''
   height=altura del tablerero
   weight=anchura del tablero
+  table= contiene el tablero con objetos, los objetos tienen la posicion del tablero
+
   '''
   table = []
   objects = []
   countObjects = 0
-
+  size={"x":int,"y":int}
   def __init__(self,height, weight):
-    self.table = [[Object for _ in range(0, weight) ] for _ in range(0, height)]
+    self.table = [[Object(x,y) for x in range(0, weight) ] for y in range(0, height)]
+    self.size={"x":height,"y":weight}
 
   def addObject(self,x,y,object):
     self.table[x][y].carry = object

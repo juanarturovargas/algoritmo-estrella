@@ -2,7 +2,7 @@ from table import Table
 from object.obstacle import Obstacle
 from object.package import Package
 from object.forklift import Forklift
-from tree import Tree
+from star import Star
 if __name__ == "__main__":
   table = Table(4,4)
   
@@ -17,12 +17,13 @@ if __name__ == "__main__":
   x_0, y_0 = forklift.getCurrentPoint()
   x_1, y_1 = package.getCurrentPoint()
 
-  tree = Tree(table)
 
-  tree.setPointToStart(x_0,y_0)
-  tree.setPointToFinish(x_1,y_1)
+  star = Star(table)
 
-  
+  star.setPointToStart(x_0,y_0)
+  star.setPointToFinish(x_1,y_1)
+
+  star.start()
   
 
   

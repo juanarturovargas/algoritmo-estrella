@@ -9,6 +9,13 @@ class Object:
     self.carry = object
     self.name = "Object"
     self.type = 0
+
+  def __init__(self,x=0, y=0):
+    self.carry = None
+    self.name = "Object"
+    self.type = 0
+    self.x = x
+    self.y = y
   
   def setX(self,x):
     self.x = x
