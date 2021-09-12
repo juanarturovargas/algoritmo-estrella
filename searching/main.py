@@ -12,7 +12,7 @@ if __name__ == "__main__":
   table.addObject(2,2, Obstacle())
   table.addObject(2,1, Obstacle())
   table.addObject(0,0, package)
-  table.addObject(2,3, forklift)
+  table.addObject(1,1, forklift)
 
   x_0, y_0 = forklift.getCurrentPoint()
   x_1, y_1 = package.getCurrentPoint()

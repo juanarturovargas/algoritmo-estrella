@@ -5,10 +5,6 @@ from tree import Tree
 class Star:
   ''' Aqui se encuentra el algoritmo estrella'''
   table = Table
-  x_0 = int
-  x_1 = int
-  y_0 = int
-  y_1 = int
   tree = Tree
 
   sPoint={"x":int,"y":int}
@@ -22,33 +18,73 @@ class Star:
   def start(self):
     tree = self.tree
     table = self.table 
-    root = table.table[self.sPoint["x"]][self.sPoint["y"]]
-    tree.setRoot(root)
-    ways = self.whereMoved(tree.root)
+    init = table.table[self.sPoint["x"]][self.sPoint["y"]]
+  
+    s = self.calculateManhattanDistance(init,self.fPoint,"start node")
+    tree.setRoot(tree.createNode(s))
+    self.analysis(tree.root)
+    
+  def analysis(self, root):
+    if self.isfound(root.object):
+        print("found")
+        return True
+    else:
+        print("continue")
+    
+    distances = self.getDistances(root.object["object"])
+
+    for x in distances:
+      newNode = self.tree.createNode(x)
+      self.tree.addChild(root,newNode)
+
+      if(self.analysis(newNode)):
+        return True
+      self.analysis(newNode)
+      
+    return False
+      
+
+  def isfound(self,object):
+    print(object["name"])
+    if(object["manhata"] == 0):
+      return True
+    return False
+
+  def getDistances(self,root):
+    ways = self.whereMoved(root)
     
     #encuentra las posiciones del tablero para moverse
-    print(ways)
+    #print(ways)
     #un ejemplo de la nueva posicions que se puede agregar
-    print(ways['up'].x, ways['up'].y)
+    #print(ways['up'].x, ways['up'].y)
 
     #a las nuevas posiciones es de evaluar la distancia manhata al punto final,
     #ordenar las distacias menoneros
     #colocar los nodos al arbol con addChild
-    #continuar el proceso  whereMoved 
+    #continuar el proceso  whereMoved
+    #  
+    distance = []
+    distance.append(self.calculateManhattanDistance(ways['up'],self.fPoint, "up"))
+    distance.append(self.calculateManhattanDistance(ways['down'],self.fPoint,"down"))
+    distance.append(self.calculateManhattanDistance(ways['left'],self.fPoint,"left"))
+    distance.append(self.calculateManhattanDistance(ways['right'],self.fPoint,"right"))
 
-    #distance = self.calculateManhattanDistance(x_0,y_0,x_1,y_1)
+    distance.sort(key=lambda d:(d['manhata']is None, d['manhata']))
+
+    return distance
+    #
 
   def whereMoved(self,node):
     ''' 
       Este metodo identifica el que movimientos pueden realizarse dentro de la posicion actual
     '''
     table = self.table
-    x = node.object.x
-    y = node.object.y
-    _up = x -  1
-    _down = x + 1
-    _left = y - 1
-    _right = y + 1
+    x = node.x
+    y = node.y
+    _up = y -  1
+    _down = y + 1
+    _left = x - 1
+    _right = x + 1
 
     up = None
     down = None
@@ -66,9 +102,16 @@ class Star:
 
     return {"up": up, "down": down, "left": left, "right":right}
 
-  def calculateManhattanDistance(self,x_0,y_0,x_1,y_1):
-    return 0
-
+  def calculateManhattanDistance(self, currentPoint, finalPoint, name=""):
+    if(currentPoint == None ):
+      distance = {"manhata":None, "object":currentPoint,"name":name}
+      return distance  
+    
+    x = abs(currentPoint.x - finalPoint["x"])
+    y = abs(currentPoint.y - finalPoint["y"])
+    h = x+y
+    distance = {"manhata":h, "object":currentPoint, "name":name}
+    return distance
 
 
   def setPointToStart(self,x,y):

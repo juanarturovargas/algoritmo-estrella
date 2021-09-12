@@ -1,7 +1,7 @@
 
 from object.object import Object
 class Node:
-  object = Object
+  object = {"manhata":int,"object":object,"name":str}
   children = []
   distance = int
 

@@ -10,4 +10,7 @@ class Tree:
     dad.children.append(child)
 
   def setRoot(self,node):
-    self.root = Node(node) 
+    self.root = node
+
+  def createNode(self,object):
+    return Node(object)
