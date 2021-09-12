@@ -34,5 +34,21 @@ class Table:
     
     return self.table[x][y].carry.type
 
-    
+  def printTable(self):
+    print('--->')
+    print('Tamaño de la tabla: ',self.size)
+    tableLength = len(self.table);
+    tableHigth = len(self.table[0])
+    print('-------------'*tableLength)
+    for i in range(len(self.table)):
+        row = ''
+        for j in range(len(self.table[i])):
+            obj = self.table[i][j]
+            if obj.carry != None:
+              row = row + '|' + obj.carry.name + '('+str(obj.getX())+','+str(obj.getY())+')'+'|'
+            else:
+              row = row + '|('+str(obj.getX())+','+str(obj.getY())+')'+'|'
+        print(row)
+        print('-------------'*tableLength)
+        print()    
 

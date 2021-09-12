@@ -16,6 +16,7 @@ class Star:
     self.tree = Tree()
 
   def start(self):
+    
     tree = self.tree
     table = self.table 
     init = table.table[self.sPoint["x"]][self.sPoint["y"]]
@@ -103,6 +104,7 @@ class Star:
     return {"up": up, "down": down, "left": left, "right":right}
 
   def calculateManhattanDistance(self, currentPoint, finalPoint, name=""):
+
     if(currentPoint == None ):
       distance = {"manhata":None, "object":currentPoint,"name":name}
       return distance  

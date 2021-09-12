@@ -4,3 +4,4 @@ class Obstacle (Object):
     super().__init__()
     self.name = "obstacle"
     self.type = 2
+    print(self.name)
