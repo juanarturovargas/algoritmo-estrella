@@ -39,13 +39,12 @@ class Star:
 
   def showOpenList(self):
     openList = self.openList
-    openList.showMemory()
+    #openList.showMemory()
 
   
   def analysis(self, root):
     
     if self.isfound(root.object):
-       
         self.tree.isFinish = True
         x = root.object["object"].x
         y = root.object["object"].y
@@ -55,7 +54,7 @@ class Star:
     else:
         x = root.object["object"].x
         y = root.object["object"].y
-        print("continue",x,y)
+        print("to continue",x,y)
     
     distances = self.getDistances(root.object["object"])
 
@@ -70,7 +69,7 @@ class Star:
           self.memory.add(newNode)
           _x = root.object["object"].x
           _y = root.object["object"].y
-          print("padre",_x,_y)
+          print("From",_x,_y)
           found = self.analysis(newNode)
           return found
         continue

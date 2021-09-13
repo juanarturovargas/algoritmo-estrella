@@ -5,9 +5,11 @@ class Node:
   children = []
   distance = int
   id = int
+  isUse = bool
 
   def __init__(self,object,id):
     self.object = object
     self.id = id
     self.children = []
+    self.isUse = False
 

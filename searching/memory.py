@@ -15,8 +15,9 @@ class Memory:
     if(nodeTree.object["object"]!= None):
       x = nodeTree.object["object"].x
       y = nodeTree.object["object"].y
-      memory[x][y]= nodeTree
-      return x,y
+      if(memory[x][y]==None):
+        memory[x][y]= nodeTree
+        return x,y
     return -1,-1
 
   def possIsNone(self,nodeTree):
@@ -29,6 +30,14 @@ class Memory:
       return True
 
     return False
+
+  def getNode(self, x, y):
+    self.memory[x][y].isUse = True
+    return self.memory[x][y]
+
+  def isUsed(self,x,y):
+    node = self.memory[x][y]
+    return node.isUse 
 
   def showMemory(self):
     for list in self.memory:
