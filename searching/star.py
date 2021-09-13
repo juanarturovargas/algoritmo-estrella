@@ -39,7 +39,7 @@ class Star:
 
   def showOpenList(self):
     openList = self.openList
-    #openList.showMemory()
+    openList.showMemory()
 
   
   def analysis(self, root):

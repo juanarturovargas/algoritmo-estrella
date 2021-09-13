@@ -31,5 +31,10 @@ class Memory:
     return False
 
   def showMemory(self):
-    pass
+    for list in self.memory:
+      for node in list:
+          if node == None:
+            continue
+          else:
+            print("(", node.object["object"].x ,",", node.object["object"].y, ")")
 

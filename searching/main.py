@@ -78,3 +78,6 @@ if __name__ == "__main__":
   star6.setPointToFinish(x_1,y_1)
 
   x_0, y_0 = star6.start()
+
+  print("Open List")
+  star6.showOpenList()
