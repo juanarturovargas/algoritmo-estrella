@@ -28,6 +28,8 @@ if __name__ == "__main__":
   star.setPointToStart(x_0,y_0)
   star.setPointToFinish(x_1,y_1)
   x_0, y_0 = star.start()
+
+  star.showCloseList()
   
   print("left fist package")
   x_1, y_1 = 3,3
@@ -36,6 +38,8 @@ if __name__ == "__main__":
   star2.setPointToStart(x_0,y_0)
   star2.setPointToFinish(x_1,y_1)
   x_0, y_0 = star2.start()
+
+  star.showCloseList()
   
   print("get second package")
 
@@ -46,6 +50,8 @@ if __name__ == "__main__":
   star3.setPointToStart(x_0,y_0)
   star3.setPointToFinish(x_1,y_1)
   x_0, y_0 = star3.start()
+
+  star.showCloseList()
   print("left second package")
   
   x_1, y_1 = 3,2
@@ -54,7 +60,7 @@ if __name__ == "__main__":
   star4.setPointToStart(x_0,y_0)
   star4.setPointToFinish(x_1,y_1)
   x_0, y_0 = star4.start()
-  
+  star.showCloseList()
   print("get third package")
   x_1, y_1 = package3.getCurrentPoint()
 
@@ -62,6 +68,7 @@ if __name__ == "__main__":
   star5.setPointToStart(x_0,y_0)
   star5.setPointToFinish(x_1,y_1)
   x_0, y_0 = star5.start()
+  star.showCloseList()
   print("left third package")
   
   x_1, y_1 = 1,3
