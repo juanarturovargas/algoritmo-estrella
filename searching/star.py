@@ -45,18 +45,22 @@ class Star:
   def analysis(self, root):
     
     if self.isfound(root.object):
-        print("found")
+       
         self.tree.isFinish = True
         x = root.object["object"].x
         y = root.object["object"].y
         self.currentPoint={"x":x,"y":y}
+        print("found",x,y)
         return True
     else:
-        print("continue")
+        x = root.object["object"].x
+        y = root.object["object"].y
+        print("continue",x,y)
     
     distances = self.getDistances(root.object["object"])
 
     for x in distances:
+      
       newNode = x
       self.tree.addChild(root,newNode)
       
@@ -64,6 +68,9 @@ class Star:
       if(self.tree.isFinish == False ):
         if(self.memory.possIsNone(newNode)):
           self.memory.add(newNode)
+          _x = root.object["object"].x
+          _y = root.object["object"].y
+          print("padre",_x,_y)
           found = self.analysis(newNode)
           return found
         continue
