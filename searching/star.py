@@ -8,6 +8,7 @@ class Star:
   table = Table
   tree = Tree
   memory = Memory
+  openList = Memory
 
   sPoint={"x":int,"y":int}
   fPoint={"x":int,"y":int}
@@ -17,7 +18,7 @@ class Star:
     
     self.tree = Tree()
     self.memory = Memory(table.size["x"], table.size["y"])
-
+    self.openList = Memory(table.size["x"], table.size["y"])
   def start(self):
 
     tree = self.tree
@@ -128,13 +129,14 @@ class Star:
 
     if(currentPoint == None ):
       distance =  self.tree.createNode({"manhata":None, "object":currentPoint,"name":name})
+      self.openList.add(distance)
       return distance  
     
     x = abs(currentPoint.x - finalPoint["x"])
     y = abs(currentPoint.y - finalPoint["y"])
     h = x+y
     distance = self.tree.createNode({"manhata":h, "object":currentPoint, "name":name})
-    
+    self.openList.add(distance)
     return distance
 
 
