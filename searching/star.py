@@ -12,7 +12,7 @@ class Star:
 
   sPoint={"x":int,"y":int}
   fPoint={"x":int,"y":int}
-  
+  currentPoint={"x":int,"y":int}
   def __init__(self,table):
     self.table = table
     
@@ -31,12 +31,22 @@ class Star:
     memory.add(s)
     self.analysis(tree.root)
     tree.showTree(tree.root)
-    
+    return self.currentPoint['x'],self.currentPoint['y']
+
+
+  def showCloseList(self):
+    tree = self.tree
+    tree.showTree(tree.root)
+
+  
   def analysis(self, root):
     
     if self.isfound(root.object):
         print("found")
         self.tree.isFinish = True
+        x = root.object["object"].x
+        y = root.object["object"].y
+        self.currentPoint={"x":x,"y":y}
         return True
     else:
         print("continue")
@@ -46,12 +56,14 @@ class Star:
     for x in distances:
       newNode = x
       self.tree.addChild(root,newNode)
-      self.memory.add(newNode)
+      
       
       if(self.tree.isFinish == False ):
-        if(self.memory.possIsNone):
+        if(self.memory.possIsNone(newNode)):
+          self.memory.add(newNode)
           found = self.analysis(newNode)
           return found
+        continue
             
     return False
       
