@@ -24,6 +24,18 @@ class Tree:
     if(length<0):
       return ""
     for x in root.children:
-      print(str(root.id)+root.object["name"]+"->"+str(x.id)+x.object["name"])
+      if(x.object["object"]== None):
+        continue
+      print(
+        str(root.id)+
+        root.object["name"]+'('+
+        str(root.object["object"].x)+","+
+        str(root.object["object"].y)+')'
+        "->"+
+        str(x.id)+
+        x.object["name"]+'('+
+        str(x.object["object"].x)+","+
+        str(x.object["object"].y)+')'
+      )
       self.showTree(x)
-    print(str(root.id)+root.object["name"])
+    #print(str(root.id)+root.object["name"])

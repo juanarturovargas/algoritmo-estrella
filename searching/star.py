@@ -75,8 +75,8 @@ class Star:
     #  
     distance = []
     distance.append(self.calculateManhattanDistance(ways['up'],self.fPoint, "up"))
-    distance.append(self.calculateManhattanDistance(ways['down'],self.fPoint,"down"))
     distance.append(self.calculateManhattanDistance(ways['left'],self.fPoint,"left"))
+    distance.append(self.calculateManhattanDistance(ways['down'],self.fPoint,"down"))
     distance.append(self.calculateManhattanDistance(ways['right'],self.fPoint,"right"))
 
     distance.sort(key=lambda d:(d.object['manhata']is None, d.object['manhata']))
@@ -101,17 +101,28 @@ class Star:
     left = None
     right = None
     # se debe evaluar si en la posicion donde se movió existe un obstaculo con table.table[x][y].carry si es == none es porque no existe nada
-    if(_up != -1 ):
+    if(_up != -1 and not self.existObstacule(x,_up)):
       up = table.table[x][_up]
-    if(_down != table.size["y"] ):
+    if(_down != table.size["y"] and not self.existObstacule(x,_down)):
       down = table.table[x][_down]
-    if(_left != -1 ):
+    if(_left != -1 and not self.existObstacule(_left,y)):
       left = table.table[_left][y]
-    if(_right != table.size["x"]):
+    if(_right != table.size["x"] and not self.existObstacule(_right,y)):
       right = table.table[_right][y]
 
     return {"up": up, "down": down, "left": left, "right":right}
 
+  def existObstacule(self,x,y):
+    table = self.table
+    obstacule = table.table[x][y]
+    if(obstacule.carry == None):
+      return False
+    
+    if(obstacule.carry.name == "obstacle"):
+      return True
+
+    return False
+    
   def calculateManhattanDistance(self, currentPoint, finalPoint, name=""):
 
     if(currentPoint == None ):

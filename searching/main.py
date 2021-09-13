@@ -9,8 +9,8 @@ if __name__ == "__main__":
   package = Package()
   forklift = Forklift()
 
-  table.addObject(2,2, Obstacle())
-  table.addObject(2,1, Obstacle())
+  table.addObject(2,0, Obstacle())
+  table.addObject(1,0, Obstacle())
   table.addObject(3,3, package)
   table.addObject(0,0, forklift)
   table.printTable()
