@@ -9,20 +9,21 @@ if __name__ == "__main__":
   package = Package()
   forklift = Forklift()
 
-  table.addObject(2,0, Obstacle())
+  table.addObject(0,0, package)
+  table.addObject(3,0, package)
   table.addObject(1,0, Obstacle())
-  table.addObject(3,3, package)
-  table.addObject(0,0, forklift)
+  table.addObject(1,1, Obstacle())
+  table.addObject(0,2, package)
+  table.addObject(2,2, forklift)
   table.printTable()
   x_0, y_0 = forklift.getCurrentPoint()
   x_1, y_1 = package.getCurrentPoint()
 
 
   star = Star(table)
-
   star.setPointToStart(x_0,y_0)
   star.setPointToFinish(x_1,y_1)
-
+  
   star.start()
   
 

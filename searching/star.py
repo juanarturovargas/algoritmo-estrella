@@ -49,7 +49,8 @@ class Star:
       
       if(self.tree.isFinish == False ):
         if(self.memory.possIsNone):
-          self.analysis(newNode)
+          found = self.analysis(newNode)
+          return found
             
     return False
       
