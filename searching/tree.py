@@ -28,7 +28,7 @@ class Tree:
         continue
       print(
         str(root.id)+
-        root.object["name"]+'('+
+        root.object["name"] + "FROM " +'('+
         str(root.object["object"].x)+","+
         str(root.object["object"].y)+')'
         "->"+
