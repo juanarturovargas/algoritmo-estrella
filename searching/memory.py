@@ -21,6 +21,8 @@ class Memory:
 
   def possIsNone(self,nodeTree):
     memory = self.memory
+    if nodeTree.object["object"] == None:
+      return False
     x = nodeTree.object["object"].x
     y = nodeTree.object["object"].y
     if(memory[x][y]==None):

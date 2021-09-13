@@ -30,7 +30,6 @@ class Star:
     tree.setRoot(s)
     memory.add(s)
     self.analysis(tree.root)
-    tree.showTree(tree.root)
     return self.currentPoint['x'],self.currentPoint['y']
 
 
@@ -73,7 +72,7 @@ class Star:
       
 
   def isfound(self,object):
-    print(object["name"])
+    
     if(object["manhata"] == 0):
       return True
     return False
