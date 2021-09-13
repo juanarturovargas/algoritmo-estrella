@@ -1,11 +1,13 @@
 from table import Table
 from object.object import Object
 from tree import Tree
+from memory import Memory 
 
 class Star:
   ''' Aqui se encuentra el algoritmo estrella'''
   table = Table
   tree = Tree
+  memory = Memory
 
   sPoint={"x":int,"y":int}
   fPoint={"x":int,"y":int}
@@ -14,19 +16,23 @@ class Star:
     self.table = table
     
     self.tree = Tree()
+    self.memory = Memory(table.size["x"], table.size["y"])
 
   def start(self):
 
     tree = self.tree
     table = self.table 
     init = table.table[self.sPoint["x"]][self.sPoint["y"]]
+    memory = self.memory
   
     s = self.calculateManhattanDistance(init,self.fPoint,"start node")
-    tree.setRoot(tree.createNode(s))
+    tree.setRoot(s)
+    memory.add(s)
     self.analysis(tree.root)
     tree.showTree(tree.root)
     
   def analysis(self, root):
+    
     if self.isfound(root.object):
         print("found")
         self.tree.isFinish = True
@@ -37,14 +43,14 @@ class Star:
     distances = self.getDistances(root.object["object"])
 
     for x in distances:
-      newNode = self.tree.createNode(x)
+      newNode = x
       self.tree.addChild(root,newNode)
+      self.memory.add(newNode)
       
       if(self.tree.isFinish == False ):
-        self.analysis(newNode)
-      
-      #
-      
+        if(self.memory.possIsNone):
+          self.analysis(newNode)
+            
     return False
       
 
@@ -73,7 +79,7 @@ class Star:
     distance.append(self.calculateManhattanDistance(ways['left'],self.fPoint,"left"))
     distance.append(self.calculateManhattanDistance(ways['right'],self.fPoint,"right"))
 
-    distance.sort(key=lambda d:(d['manhata']is None, d['manhata']))
+    distance.sort(key=lambda d:(d.object['manhata']is None, d.object['manhata']))
 
     return distance
     #
@@ -109,13 +115,14 @@ class Star:
   def calculateManhattanDistance(self, currentPoint, finalPoint, name=""):
 
     if(currentPoint == None ):
-      distance = {"manhata":None, "object":currentPoint,"name":name}
+      distance =  self.tree.createNode({"manhata":None, "object":currentPoint,"name":name})
       return distance  
     
     x = abs(currentPoint.x - finalPoint["x"])
     y = abs(currentPoint.y - finalPoint["y"])
     h = x+y
-    distance = {"manhata":h, "object":currentPoint, "name":name}
+    distance = self.tree.createNode({"manhata":h, "object":currentPoint, "name":name})
+    
     return distance
 
 
