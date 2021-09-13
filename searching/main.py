@@ -80,3 +80,4 @@ if __name__ == "__main__":
   x_0, y_0 = star6.start()
 
   star.showCloseList()
+  
