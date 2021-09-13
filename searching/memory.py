@@ -28,3 +28,6 @@ class Memory:
 
     return False
 
+  def showMemory(self):
+    pass
+

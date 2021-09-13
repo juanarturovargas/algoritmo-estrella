@@ -27,44 +27,43 @@ if __name__ == "__main__":
   star = Star(table)
   star.setPointToStart(x_0,y_0)
   star.setPointToFinish(x_1,y_1)
+  x_0, y_0 = star.start()
   
   print("left fist package")
-  x_0, y_0 = star.start()
   x_1, y_1 = 3,3
 
   star2 = Star(table)
   star2.setPointToStart(x_0,y_0)
   star2.setPointToFinish(x_1,y_1)
-
+  x_0, y_0 = star2.start()
   
   print("get second package")
 
-  x_0, y_0 = star2.start()
+  
   x_1, y_1 = package2.getCurrentPoint()
 
   star3 = Star(table)
   star3.setPointToStart(x_0,y_0)
   star3.setPointToFinish(x_1,y_1)
-
-  print("left second package")
   x_0, y_0 = star3.start()
+  print("left second package")
+  
   x_1, y_1 = 2,2
 
   star4 = Star(table)
   star4.setPointToStart(x_0,y_0)
   star4.setPointToFinish(x_1,y_1)
-
-  print("get third package")
-
   x_0, y_0 = star4.start()
+  
+  print("get third package")
   x_1, y_1 = package3.getCurrentPoint()
 
   star5 = Star(table)
   star5.setPointToStart(x_0,y_0)
   star5.setPointToFinish(x_1,y_1)
-
-  print("left third package")
   x_0, y_0 = star5.start()
+  print("left third package")
+  
   x_1, y_1 = 5,5
 
   star6 = Star(table)

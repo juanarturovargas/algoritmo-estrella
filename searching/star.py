@@ -38,6 +38,10 @@ class Star:
     tree = self.tree
     tree.showTree(tree.root)
 
+  def showOpenList(self):
+    openList = self.openList
+    #openList.showMemory()
+
   
   def analysis(self, root):
     
