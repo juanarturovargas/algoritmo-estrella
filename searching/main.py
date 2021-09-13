@@ -48,7 +48,7 @@ if __name__ == "__main__":
   x_0, y_0 = star3.start()
   print("left second package")
   
-  x_1, y_1 = 2,2
+  x_1, y_1 = 3,2
 
   star4 = Star(table)
   star4.setPointToStart(x_0,y_0)
@@ -64,7 +64,7 @@ if __name__ == "__main__":
   x_0, y_0 = star5.start()
   print("left third package")
   
-  x_1, y_1 = 5,5
+  x_1, y_1 = 1,3
 
   star6 = Star(table)
   star6.setPointToStart(x_0,y_0)
