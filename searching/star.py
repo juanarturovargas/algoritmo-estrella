@@ -16,7 +16,7 @@ class Star:
     self.tree = Tree()
 
   def start(self):
-    
+
     tree = self.tree
     table = self.table 
     init = table.table[self.sPoint["x"]][self.sPoint["y"]]
@@ -24,10 +24,12 @@ class Star:
     s = self.calculateManhattanDistance(init,self.fPoint,"start node")
     tree.setRoot(tree.createNode(s))
     self.analysis(tree.root)
+    tree.showTree(tree.root)
     
   def analysis(self, root):
     if self.isfound(root.object):
         print("found")
+        self.tree.isFinish = True
         return True
     else:
         print("continue")
@@ -37,10 +39,11 @@ class Star:
     for x in distances:
       newNode = self.tree.createNode(x)
       self.tree.addChild(root,newNode)
-
-      if(self.analysis(newNode)):
-        return True
-      self.analysis(newNode)
+      
+      if(self.tree.isFinish == False ):
+        self.analysis(newNode)
+      
+      #
       
     return False
       
