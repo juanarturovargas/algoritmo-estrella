@@ -27,15 +27,14 @@ class Tree:
       if(x.object["object"]== None):
         continue
       print(
-        str(root.id)+
-        root.object["name"] + "FROM " +'('+
-        str(root.object["object"].x)+","+
+         " Mover robot desde " +'('+
+        str(root.object["object"].x)+", "+
         str(root.object["object"].y)+')'
-        "->"+
-        str(x.id)+
-        x.object["name"]+'('+
-        str(x.object["object"].x)+","+
+        " hacia"+
+        '('+
+        str(x.object["object"].x)+", "+
         str(x.object["object"].y)+')'
-      )
+      )        
+    
       self.showTree(x)
-    #print(str(root.id)+root.object["name"])
+    

@@ -1,12 +1,10 @@
 from object.object import Object
 
 class Table:
-
   '''
   height=altura del tablerero
   weight=anchura del tablero
   table= contiene el tablero con objetos, los objetos tienen la posicion del tablero
-
   '''
   table = []
   objects = []
@@ -39,15 +37,15 @@ class Table:
     print('Tamaño de la tabla: ',self.size)
     tableLength = len(self.table);
     tableHigth = len(self.table[0])
-    print('-------------'*tableLength)
+    print('-------------' * tableLength)
     for i in range(len(self.table)):
         row = ''
         for j in range(len(self.table[i])):
             obj = self.table[i][j]
             if obj.carry != None:
-              row = row + '|' + obj.carry.name + '('+str(obj.getX())+','+str(obj.getY())+')'+'|'
+              row = row + '|' + obj.carry.name + '('+str(obj.getX())+','+str(obj.getY())+')'+'\t|'
             else:
-              row = row + '|('+str(obj.getX())+','+str(obj.getY())+')'+'|'
+              row = row + '|('+str(obj.getX())+','+str(obj.getY())+')'+'\t\t|'
         print(row)
         print('-------------'*tableLength)
         print()    

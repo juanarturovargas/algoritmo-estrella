@@ -9,67 +9,72 @@ class Star:
   tree = Tree
   memory = Memory
   openList = Memory
+  openList2 = []
 
   sPoint={"x":int,"y":int}
   fPoint={"x":int,"y":int}
   currentPoint={"x":int,"y":int}
+
   def __init__(self,table):
-    self.table = table
-    
+    self.table = table    
     self.tree = Tree()
     self.memory = Memory(table.size["x"], table.size["y"])
     self.openList = Memory(table.size["x"], table.size["y"])
-  def start(self):
+    self.g_value = 0
 
+  def start(self):
     tree = self.tree
     table = self.table 
     init = table.table[self.sPoint["x"]][self.sPoint["y"]]
     memory = self.memory
-  
+
     s = self.calculateManhattanDistance(init,self.fPoint,"start node")
     tree.setRoot(s)
     memory.add(s)
     self.analysis(tree.root)
     return self.currentPoint['x'],self.currentPoint['y']
 
-
   def showCloseList(self):
     tree = self.tree
     tree.showTree(tree.root)
 
   def showOpenList(self):
-    openList = self.openList
-    #openList.showMemory()
+    f =  True
+    for l in self.openList2:
+      if f:
+        f=False
+        continue
 
-  
-  def analysis(self, root):
-    
+      if l["name"] == "root":
+        print("----------------------------------------")
+        
+      print( l["name"], " (",l["current"].x, ",", l["current"].y, ")")
+
+  def analysis(self, root):   
+    text = "" 
     if self.isfound(root.object):
         self.tree.isFinish = True
         x = root.object["object"].x
         y = root.object["object"].y
         self.currentPoint={"x":x,"y":y}
-        print("found",x,y)
+        #print("found",x,y)
         return True
     else:
         x = root.object["object"].x
         y = root.object["object"].y
-        print("to continue",x,y)
+        #print("  to continue",x,y)
     
     distances = self.getDistances(root.object["object"])
 
-    for x in distances:
-      
+    for x in distances:      
       newNode = x
-      self.tree.addChild(root,newNode)
-      
-      
+      self.tree.addChild(root,newNode) 
       if(self.tree.isFinish == False ):
         if(self.memory.possIsNone(newNode)):
           self.memory.add(newNode)
           _x = root.object["object"].x
           _y = root.object["object"].y
-          print("From",_x,_y)
+          #print("Mover robot a (",_x,', ',_y,')')
           found = self.analysis(newNode)
           return found
         continue
@@ -77,15 +82,14 @@ class Star:
     return False
       
 
-  def isfound(self,object):
-    
+  def isfound(self,object):    
     if(object["manhata"] == 0):
       return True
     return False
 
   def getDistances(self,root):
     ways = self.whereMoved(root)
-    
+    self.openList2.append({"name":"root", "current":root})
     #encuentra las posiciones del tablero para moverse
     #print(ways)
     #un ejemplo de la nueva posicions que se puede agregar
@@ -95,17 +99,16 @@ class Star:
     #ordenar las distacias menoneros
     #colocar los nodos al arbol con addChild
     #continuar el proceso  whereMoved
-    #  
+ 
     distance = []
     distance.append(self.calculateManhattanDistance(ways['up'],self.fPoint, "up"))
-    distance.append(self.calculateManhattanDistance(ways['left'],self.fPoint,"left"))
-    distance.append(self.calculateManhattanDistance(ways['down'],self.fPoint,"down"))
     distance.append(self.calculateManhattanDistance(ways['right'],self.fPoint,"right"))
+    distance.append(self.calculateManhattanDistance(ways['down'],self.fPoint,"down"))
+    distance.append(self.calculateManhattanDistance(ways['left'],self.fPoint,"left"))
 
     distance.sort(key=lambda d:(d.object['manhata']is None, d.object['manhata']))
-
+ 
     return distance
-    #
 
   def whereMoved(self,node):
     ''' 
@@ -147,7 +150,6 @@ class Star:
     return False
     
   def calculateManhattanDistance(self, currentPoint, finalPoint, name=""):
-
     if(currentPoint == None ):
       distance =  self.tree.createNode({"manhata":None, "object":currentPoint,"name":name})
       self.openList.add(distance)
@@ -155,11 +157,12 @@ class Star:
     
     x = abs(currentPoint.x - finalPoint["x"])
     y = abs(currentPoint.y - finalPoint["y"])
-    h = x+y
-    distance = self.tree.createNode({"manhata":h, "object":currentPoint, "name":name})
-    self.openList.add(distance)
+    h = x + y
+    f = h + self.g_value
+    self.openList2.append({"name":"   child", "current":currentPoint})
+    distance = self.tree.createNode({"manhata":f, "object":currentPoint, "name":name})
+    self.openList.add(distance)    
     return distance
-
 
   def setPointToStart(self,x,y):
     self.x_0 = x

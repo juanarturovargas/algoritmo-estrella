@@ -1,12 +1,11 @@
-
 from node import Node
 
+#Permite el registro de los nodos recorridos
 class Memory:
-  
   countNode = 0
   memory = []
-
-  
+ 
+ #constructor
   def __init__(self,weight,height):
     self.memory = [[None for y in range(0, height) ] for x in range(0,weight )]
 
@@ -20,6 +19,7 @@ class Memory:
         return x,y
     return -1,-1
 
+  #Verifica si el nodo es None
   def possIsNone(self,nodeTree):
     memory = self.memory
     if nodeTree.object["object"] == None:
@@ -31,14 +31,17 @@ class Memory:
 
     return False
 
+  #Retorna el nodo, especificado
   def getNode(self, x, y):
     self.memory[x][y].isUse = True
     return self.memory[x][y]
 
+  #Marca el nodo como en uso
   def isUsed(self,x,y):
     node = self.memory[x][y]
     return node.isUse 
 
+  #Realiza la impresion de la lista contenida en la memoria
   def showMemory(self):
     for list in self.memory:
       for node in list:

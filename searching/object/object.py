@@ -1,3 +1,4 @@
+#Clase que define un objeto, con sus tipos, nombre y posicion
 class Object:
   carry = None
   name = str
@@ -5,6 +6,7 @@ class Object:
   x = 0
   y = 0
 
+  #Constructore
   def __init__(self,object=None):
     self.carry = object
     self.name = "Object"
@@ -17,21 +19,27 @@ class Object:
     self.x = x
     self.y = y
   
+  #Asigna la posicion en X
   def setX(self,x):
     self.x = x
   
+  #Asigna la posicion en Y
   def setY(self,y):
     self.y = y
 
+  #Asigna la posicion en X, y
   def setPoint(self,x,y):
     self.x = x
     self.y = y
 
+  #Retorna las posiciones X, Y
   def getCurrentPoint(self):
     return self.x, self.y
 
+  #Retorna la posicion en X
   def getX(self):
     return self.x
   
+  #Retorna la posicion en Y
   def getY(self):
     return self.y
