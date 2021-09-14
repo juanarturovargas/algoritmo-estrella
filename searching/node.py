@@ -1,5 +1,6 @@
 from object.object import Object
 
+#clase que identifica a un nodo del árbol de busqueda 
 class Node:
   object = {"manhata":int,"object":Object,"name":str}
   children = []
@@ -13,4 +14,3 @@ class Node:
     self.id = id
     self.children = []
     self.isUse = False
-

@@ -1,37 +1,29 @@
 from object.object import Object
 
+#Clase que define el contenedor por donde se movera el robot marcando los inventarios y los obstaculos
 class Table:
-  '''
-  height=altura del tablerero
-  weight=anchura del tablero
-  table= contiene el tablero con objetos, los objetos tienen la posicion del tablero
-  '''
+  #height=altura del tablerero
+  #weight=anchura del tablero
+  #table= contiene el tablero con objetos, los objetos tienen la posicion del tablero´
+
   table = []
   objects = []
   countObjects = 0
   size={"x":int,"y":int}
+
+  #constructor
   def __init__(self, weight,height):
     self.table = [[Object(x,y) for y in range(0, height) ] for x in range(0,weight )]
     self.size={"x":weight,"y":height}
 
+  #Permite agregar un objeto al tablero
   def addObject(self,x,y,object):
     self.table[x][y].carry = object
     object.setPoint(x,y)
     self.countObjects += 1
     self.objects.append({id:self.countObjects, object:object})
 
-  def getNameObject(self,x,y):
-    if (self.table[x][y].carry == None):
-      return "no Object"
-    
-    return self.table[x][y].carry.name
-
-  def getNameObject(self,x,y):
-    if (self.table[x][y].carry == None):
-      return -1
-    
-    return self.table[x][y].carry.type
-
+  #Imprime el tablero
   def printTable(self):
     print('--->')
     print('Tamaño de la tabla: ',self.size)

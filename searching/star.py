@@ -3,8 +3,10 @@ from object.object import Object
 from tree import Tree
 from memory import Memory 
 
+#Clase que realiza la ejecucion del algoritmo A*
 class Star:
-  ''' Aqui se encuentra el algoritmo estrella'''
+
+  #Definimos las propiedades
   table = Table
   tree = Tree
   memory = Memory
@@ -15,6 +17,7 @@ class Star:
   fPoint={"x":int,"y":int}
   currentPoint={"x":int,"y":int}
 
+ #constructor que inicializa las propiedades
   def __init__(self,table):
     self.table = table    
     self.tree = Tree()
@@ -22,6 +25,12 @@ class Star:
     self.openList = Memory(table.size["x"], table.size["y"])
     self.g_value = 0
 
+  #Ejecucion del algoritmo A*
+  # obtenmos los nodos de toda la tabla y los recorremos para identificar donde se encuentra cada punto
+  # Calculamos y obtenemos la distancia de Manhattan
+  # agregamos cada nodo recorrido a la memoria para posteriormente imprimirlos
+  # se realiza el analisis de los nodos para obtener el que posee la menor distancia
+  # se retorna la posicion en la cual quedo el robot que sera utilizada por el siguiente problema como posicion inicial
   def start(self):
     tree = self.tree
     table = self.table 
@@ -34,10 +43,13 @@ class Star:
     self.analysis(tree.root)
     return self.currentPoint['x'],self.currentPoint['y']
 
+
+  #Permite la impresion de la lista Cerrada
   def showCloseList(self):
     tree = self.tree
     tree.showTree(tree.root)
 
+  #Permite la impresion de la lista abierta
   def showOpenList(self):
     f =  True
     for l in self.openList2:
@@ -50,6 +62,7 @@ class Star:
         
       print( l["name"], " (",l["current"].x, ",", l["current"].y, ")")
 
+  #Funcion que nos permite identificar cual de los nodos es el óptimo para que el robot se mueva
   def analysis(self, root):   
     text = "" 
     if self.isfound(root.object):
@@ -57,12 +70,10 @@ class Star:
         x = root.object["object"].x
         y = root.object["object"].y
         self.currentPoint={"x":x,"y":y}
-        #print("found",x,y)
         return True
     else:
         x = root.object["object"].x
         y = root.object["object"].y
-        #print("  to continue",x,y)
     
     distances = self.getDistances(root.object["object"])
 
@@ -74,7 +85,6 @@ class Star:
           self.memory.add(newNode)
           _x = root.object["object"].x
           _y = root.object["object"].y
-          #print("Mover robot a (",_x,', ',_y,')')
           found = self.analysis(newNode)
           return found
         continue
@@ -82,11 +92,13 @@ class Star:
     return False
       
 
+  #Funcion que nos permite identificar si el robot llego a la posicion objetivo
   def isfound(self,object):    
     if(object["manhata"] == 0):
       return True
     return False
 
+  #Obtiene las distancias de las pociciones vecinas
   def getDistances(self,root):
     ways = self.whereMoved(root)
     self.openList2.append({"name":"root", "current":root})
@@ -110,10 +122,8 @@ class Star:
  
     return distance
 
+  #Este metodo identifica el que movimientos pueden realizarse dentro de la posicion actual
   def whereMoved(self,node):
-    ''' 
-      Este metodo identifica el que movimientos pueden realizarse dentro de la posicion actual
-    '''
     table = self.table
     x = node.x
     y = node.y
@@ -126,6 +136,7 @@ class Star:
     down = None
     left = None
     right = None
+
     # se debe evaluar si en la posicion donde se movió existe un obstaculo con table.table[x][y].carry si es == none es porque no existe nada
     if(_up != -1 and not self.existObstacule(x,_up)):
       up = table.table[x][_up]
@@ -138,6 +149,7 @@ class Star:
 
     return {"up": up, "down": down, "left": left, "right":right}
 
+  #Identifica si hay un obstaculo en la posición marcada
   def existObstacule(self,x,y):
     table = self.table
     obstacule = table.table[x][y]
@@ -149,6 +161,7 @@ class Star:
 
     return False
     
+  #Realiza el calculo de la distancia de Manhattan
   def calculateManhattanDistance(self, currentPoint, finalPoint, name=""):
     if(currentPoint == None ):
       distance =  self.tree.createNode({"manhata":None, "object":currentPoint,"name":name})
@@ -164,11 +177,13 @@ class Star:
     self.openList.add(distance)    
     return distance
 
+  # MArca la posicion inicial
   def setPointToStart(self,x,y):
     self.x_0 = x
     self.y_0 = y
     self.sPoint={"x":x,"y":y}
 
+  #Marca la posicion final
   def setPointToFinish(self,x,y):
     self.x_1 = x
     self.y_1 = y
